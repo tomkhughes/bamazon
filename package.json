@@ -1,0 +1,28 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "bamazon mysql",
+  "main": "customer.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomkhughes/bamazon.git"
+  },
+  "keywords": [
+    "bamazon",
+    "node",
+    "mysql"
+  ],
+  "author": "Tom Hughes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomkhughes/bamazon/issues"
+  },
+  "homepage": "https://github.com/tomkhughes/bamazon#readme",
+  "dependencies": {
+    "inquirer": "^5.1.0",
+    "mysql": "^2.15.0"
+  }
+}
