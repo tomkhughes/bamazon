@@ -76,12 +76,12 @@ function startPrompt() {
 }
 
 function checkOrder(userID, units){
-	     connection.query("SELECT * FROM products WHERE id = ?",userID, function(err, results) {
+	    connection.query("SELECT * FROM products WHERE id = ?",userID, function(err, results) {
   	    if (err) throw err;
   	    if(units < results[0].stock_quantity) {
   	    		     		console.log('user ID : ' + userID);
-  	    		     		console.log('units : '+units );
-  	    		     		console.log('STOCK QUANTITY: '+results[0].stock_quantity);
+  	    		     		console.log('units : '+ units );
+  	    		     		console.log('STOCK QUANTITY: '+ results[0].stock_quantity);
 
   	    	var updateQuantity = results[0].stock_quantity - units;
   	    	connection.query(
