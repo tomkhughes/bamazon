@@ -79,11 +79,15 @@ function checkOrder(userID, units){
 	    connection.query("SELECT * FROM products WHERE id = ?",userID, function(err, results) {
   	    if (err) throw err;
   	    if(units < results[0].stock_quantity) {
-  	    		     		console.log('user ID : ' + userID);
-  	    		     		console.log('units : '+ units );
-  	    		     		console.log('STOCK QUANTITY: '+ results[0].stock_quantity);
+  	    	console.log('user ID : ' + userID);
+  	    	console.log('units : '+ units );
+  	    	console.log('STOCK QUANTITY: '+ results[0].stock_quantity);
 
   	    	var updateQuantity = results[0].stock_quantity - units;
+  	    	var price = results[0].price;  	  
+  	    	var productSales = units * price;
+  	    	var updateProductSales = parseInt(results[0].product_sales) + parseInt(productSales);
+
   	    	connection.query(
             "UPDATE products SET ? WHERE ?",
             [
@@ -92,23 +96,38 @@ function checkOrder(userID, units){
               },
               {
                 id: userID
-              }
+              },
             ],
             function(error) {
-            	 if (error) throw err;
-              console.log("Order placed successfully!");
-               console.log('UPDATE stock_quantity: '+ updateQuantity);
-              connection.end();
+            if (error) throw err;
+            }
+          );
+
+  	    	connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [
+              {
+                product_sales: updateProductSales
+              },
+              {
+                id: userID
+              },
+            ],
+            function(error) {
+            if (error) throw err;
+            	console.log("Order placed successfully!");
+            	console.log('UPDATE product_sales: '+ updateProductSales);
+              	console.log('UPDATE stock_quantity: '+ updateQuantity);
+              	connection.end();
 
             }
           );
   	    } else {
-          // bid wasn't high enough, so apologize and start over
           console.log("We are out of stock!");
           startPrompt();
 
         }
 
-});
+	});
 }
 

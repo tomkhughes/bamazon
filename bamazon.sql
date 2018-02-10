@@ -30,6 +30,13 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE departments (
+  id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(100)NULL,
+  over_head_costs DECIMAL(10, 2) NULL,
+  PRIMARY KEY (id)
+);
+
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ('soap', 'home', '5','100');
